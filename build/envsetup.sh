@@ -1,11 +1,11 @@
 # gzosp functions that extend build/envsetup.sh
 
-function gzosp_device_combos()
+function lunuxos_device_combos()
 {
     local T list_file variant device
 
     T="$(gettop)"
-    list_file="${T}/vendor/gzosp/gzosp.devices"
+    list_file="${T}/vendor/lunuxos/lunuxos.devices"
     variant="userdebug"
 
     if [[ $1 ]]
@@ -27,13 +27,13 @@ function gzosp_device_combos()
     if [[ ! -f "${list_file}" ]]
     then
         echo "unable to find device list: ${list_file}"
-        list_file="${T}/vendor/gzosp/gzosp.devices"
+        list_file="${T}/vendor/lunuxos/lunuxos.devices"
         echo "defaulting device list file to: ${list_file}"
     fi
 
     while IFS= read -r device
     do
-        add_lunch_combo "gzosp_${device}-${variant}"
+        add_lunch_combo "lunuxos_${device}-${variant}"
     done < "${list_file}"
 }
 
@@ -179,8 +179,8 @@ function hmm() #hidden
     original_gzosp_hmm
     echo
 
-    echo "vendor/gzosp extended functions. The complete list is:"
-    for i in $(grep -P '^function .*$' "$T/vendor/gzosp/build/envsetup.sh" | grep -v "#hidden" | sed 's/function \([a-z_]*\).*/\1/' | sort | uniq); do
+    echo "vendor/lunuxos extended functions. The complete list is:"
+    for i in $(grep -P '^function .*$' "$T/vendor/lunuxos/build/envsetup.sh" | grep -v "#hidden" | sed 's/function \([a-z_]*\).*/\1/' | sort | uniq); do
         echo "$i"
     done |column
 }

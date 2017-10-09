@@ -1,3 +1,3 @@
-. "$(gettop)/vendor/gzosp/build/envsetup.sh"
+. "$(gettop)/vendor/lunuxos/build/envsetup.sh"
 
-gzosp_device_combos
+lunuxos_device_combos

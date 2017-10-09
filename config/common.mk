@@ -20,29 +20,29 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Backup tool
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/gzosp/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/gzosp/prebuilt/common/bin/50-gzosp.sh:system/addon.d/50-gzosp.sh
+    vendor/lunuxos/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/lunuxos/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/lunuxos/prebuilt/common/bin/50-gzosp.sh:system/addon.d/50-gzosp.sh
 
 # Backup services whitelist
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/config/permissions/backup.xml:system/etc/sysconfig/backup.xml
+    vendor/lunuxos/config/permissions/backup.xml:system/etc/sysconfig/backup.xml
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
+    vendor/lunuxos/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
 
 # Gzosp-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/prebuilt/common/etc/init.local.rc:root/init.gzosp.rc
+    vendor/lunuxos/prebuilt/common/etc/init.local.rc:root/init.gzosp.rc
 
 # Copy LatinIME for gesture typing
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/prebuilt/common/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
+    vendor/lunuxos/prebuilt/common/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
 
 # SELinux filesystem labels
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/prebuilt/common/etc/init.d/50selinuxrelabel:system/etc/init.d/50selinuxrelabel
+    vendor/lunuxos/prebuilt/common/etc/init.d/50selinuxrelabel:system/etc/init.d/50selinuxrelabel
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -50,18 +50,18 @@ PRODUCT_COPY_FILES += \
 
 # Don't export PS1 in /system/etc/mkshrc.
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
-    vendor/gzosp/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
+    vendor/lunuxos/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
+    vendor/lunuxos/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
 
 # Fix Dialer
 PRODUCT_COPY_FILES +=  \
-    vendor/gzosp/prebuilt/common/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
+    vendor/lunuxos/prebuilt/common/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
 
 # Gzosp-specific startup services
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
-    vendor/gzosp/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
-    vendor/gzosp/prebuilt/common/bin/sysinit:system/bin/sysinit
+    vendor/lunuxos/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
+    vendor/lunuxos/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
+    vendor/lunuxos/prebuilt/common/bin/sysinit:system/bin/sysinit
 
 # Required packages
 PRODUCT_PACKAGES += \
@@ -144,14 +144,14 @@ PRODUCT_PACKAGES += \
 
 # Magisk
 #PRODUCT_COPY_FILES += \
-#   vendor/gzosp/prebuilt/common/addon.d/magisk.zip:system/addon.d/magisk.zip
+#   vendor/lunuxos/prebuilt/common/addon.d/magisk.zip:system/addon.d/magisk.zip
 #endif
 
 #ifeq ($(DEFAULT_ROOT_METHOD),supersu)
 # SuperSU
 #PRODUCT_COPY_FILES += \
-#   vendor/gzosp/prebuilt/common/etc/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
-#   vendor/gzosp/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+#   vendor/lunuxos/prebuilt/common/etc/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
+#   vendor/lunuxos/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
 #endif
 
 # Explict rootless defined, or none of the root methods defined,
@@ -176,7 +176,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # easy way to extend to add more packages
 -include vendor/extra/product.mk
 
-PRODUCT_PACKAGE_OVERLAYS += vendor/gzosp/overlay/common
+PRODUCT_PACKAGE_OVERLAYS += vendor/lunuxos/overlay/common
 
 # Boot animation include
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
@@ -190,7 +190,7 @@ TARGET_BOOTANIMATION_SIZE := $(shell \
   fi )
 
 # get a sorted list of the sizes
-bootanimation_sizes := $(subst .zip,, $(shell ls vendor/gzosp/prebuilt/common/bootanimation))
+bootanimation_sizes := $(subst .zip,, $(shell ls vendor/lunuxos/prebuilt/common/bootanimation))
 bootanimation_sizes := $(shell echo -e $(subst $(space),'\n',$(bootanimation_sizes)) | sort -rn)
 
 # find the appropriate size and set
@@ -208,10 +208,10 @@ $(foreach size,$(bootanimation_sizes), $(call check_and_set_bootanimation,$(size
 
 ifeq ($(TARGET_BOOTANIMATION_HALF_RES),true)
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/prebuilt/common/bootanimation/halfres/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
+    vendor/lunuxos/prebuilt/common/bootanimation/halfres/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
 else
 PRODUCT_COPY_FILES += \
-    vendor/gzosp/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
+    vendor/lunuxos/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
 endif
 endif
 
@@ -240,5 +240,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.modversion=$(GZOSP_MOD_VERSION) \
     ro.gzosp.buildtype=$(GZOSP_BUILD_TYPE)
 
-EXTENDED_POST_PROCESS_PROPS := vendor/gzosp/tools/gzosp_process_props.py
+EXTENDED_POST_PROCESS_PROPS := vendor/lunuxos/tools/gzosp_process_props.py
 
